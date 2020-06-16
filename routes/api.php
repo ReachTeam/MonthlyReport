@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::post('/save-influencer-report', '\Influencer\MonthlyReport\Http\Controllers\CompanyReport@sendReport');
+Route::get('/business_usernames', '\Influencer\MonthlyReport\Http\Controllers\CompanyReport@getBusinessUserNames');
 
 
 // Route::get('/endpoint', function (Request $request) {

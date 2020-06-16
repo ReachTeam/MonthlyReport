@@ -48,8 +48,16 @@ class CompanyReport extends Controller
         $name=$file->getClientOriginalName();
         $filePath = 'attachable/' .$user->id.'/'. $user->username.'-'.$request->month.'-'.Carbon::now()->year;
         Storage::disk('s3')->put($filePath, file_get_contents($file), 'public');
-        $user->addMediaFromRequest('report')->toMediaCollection('monthly_report_attachments','s3-plus');
+//        $user->addMediaFromRequest('report')->toMediaCollection('monthly_report_attachments','s3-plus');
         return $filePath;
+    }
+
+    public function getBusinessUserNames(Request $request)
+    {
+        if(!$request->username)
+            return response()->json(['usernames'=>[]]);
+        $userNames= User::where('username','like',"%".$request->username.'%')->take(20)->select(['id','username As name'])->get()->toJson();
+        return response()->json(['usernames'=>$userNames]);
     }
 }
 

@@ -11,8 +11,18 @@
                         </label>
                     </div>
                     <div class="py-6 px-8 w-1/2">
-                        <input id="username" dusk="long_url" type="text" placeholder="Business Username"
-                               class="w-full form-control form-input form-input-bordered" v-model="username">
+<!--                        <input id="username" dusk="long_url" type="text" placeholder="Business Username"-->
+<!--                               class="w-full form-control form-input form-input-bordered" v-model="username">-->
+                        <Dropdown
+                            :options="options"
+                            v-on:selected="validateSelection"
+                            v-on:filter="getDropdownValues"
+                            v-model="username"
+                            :disabled="false"
+                            name="username"
+                            :maxItem="15"
+                            placeholder="Business Username">
+                        </Dropdown>
                         <div class="help-text help-text mt-2"></div>
                     </div>
                 </div>
@@ -63,8 +73,12 @@ import axios from "axios";
 import Vue from "vue";
 import VueSweetalert2 from 'vue-sweetalert2';
 import 'sweetalert2/dist/sweetalert2.min.css';
+import Dropdown from 'vue-simple-search-dropdown';
+
 
 Vue.use(VueSweetalert2);
+Vue.use(Dropdown);
+
 export default {
     data() {
         return {
@@ -72,12 +86,48 @@ export default {
             month: new Date().getMonth(),
             report:'',
             disabled:false,
+            apiLoaded:true,
+            selected: { name: null, id: null },
+            options:[{ id: 1, name: ''}]
         }
+    },
+    components: {
+        'Dropdown' : Dropdown,
     },
     mounted() {
 
     },
     methods:{
+        validateSelection(selection) {
+            this.selected = selection;
+            this.username= selection.name;
+            console.log(selection.name+' has been selected');
+        },
+        getDropdownValues(keyword) {
+            console.log('You could refresh options by querying the API with '+keyword);
+            this.getUserNames(keyword)
+        },
+        getUserNames (keyword) {
+            let csrf= document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+            let apiUrl= window.location.origin + '/nova-vendor/monthly-report/business_usernames?username='+keyword;
+            let self= this;
+            let myHeaders = new Headers();
+            myHeaders.append("Accept", "application/json");
+            myHeaders.append('X-CSRF-Token', csrf )
+            let requestOptions = {
+                method: 'GET',
+                headers: myHeaders,
+                redirect: 'follow'
+            };
+
+            fetch(apiUrl, requestOptions)
+                .then(result => result.json())
+                .then(response=>{
+                    let usernames= JSON.parse(response.usernames);
+                    self.options = usernames.length>0?usernames:[{ id: 1, name: ''}]
+                    self.apiLoaded = true
+                });
+        },
         resetForm(){
             this.report= '';
             this.month= new Date().getMonth();
