@@ -56,7 +56,7 @@ class CompanyReport extends Controller
     {
         if(!$request->username)
             return response()->json(['usernames'=>[]]);
-        $userNames= User::where('username','like',"%".$request->username.'%')->take(20)->select(['id','username As name'])->get()->toJson();
+        $userNames= User::where('username','like',"%".$request->username.'%')->take(20)->select(['id','username'])->get();
         return response()->json(['usernames'=>$userNames]);
     }
 }
