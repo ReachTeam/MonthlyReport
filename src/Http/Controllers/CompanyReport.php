@@ -46,7 +46,7 @@ class CompanyReport extends Controller
     private function uploadInfluencerRequestToS3(Request $request, User $user){
         $file = $request->file('report');
         $name=$file->getClientOriginalName();
-        $filePath = 'attachable/' .$user->id.'/'. $user->username.'-'.$request->month.'-'.Carbon::now()->year.$file->getClientMimeType();
+        $filePath = 'attachable/' .$user->id.'/'. $user->username.'-'.$request->month.'-'.Carbon::now()->year.$file->getClientOriginalExtension();
         Storage::disk('s3')->put($filePath, file_get_contents($file), 'public');
 //        $user->addMediaFromRequest('report')->toMediaCollection('monthly_report_attachments','s3-plus');
         return $filePath;
