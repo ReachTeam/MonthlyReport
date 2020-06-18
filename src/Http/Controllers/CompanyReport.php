@@ -28,7 +28,7 @@ class CompanyReport extends Controller
      */
     public function sendReport(Request $request)
     {
-        $data= $this->validate($request, ['username'=>'required|exists:users,username','month'=>'required|numeric|max:12','report'=>'required|file']);
+        $data= $this->validate($request, ['username'=>'required|exists:users,username','month'=>'required|numeric|max:12','year'=>'required|numeric','report'=>'required|file']);
         $user= User::where('username',$data['username'])->first();
         if(!$user)
             return response()->json(['message'=>'This user is not found or seems to be deleted'],400);
@@ -38,6 +38,7 @@ class CompanyReport extends Controller
             'url'=>$url,
             'username'=>$data['username'],
             'month'=>$data['month'],
+            'year'=>$data['year'],
         ]);
         return response()->json(['message'=>'Attachment Saved Successfully','report'=>$attachment->url],200);
 
