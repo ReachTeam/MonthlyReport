@@ -28,7 +28,7 @@ class CompanyReport extends Controller
      */
     public function sendReport(Request $request)
     {
-        $data= $this->validate($request, ['username'=>'required|exists:users,username','month'=>'required|numeric|max:12','year'=>'required|numeric','report'=>'required|file']);
+        $data= $this->validate($request, ['username'=>'required|exists:users,username','month'=>'required|numeric|max:12','year'=>'required|numeric','report'=>'required|file|mimes:pdf|max:10240']);
         $user= User::where('username',$data['username'])->first();
         if(!$user)
             return response()->json(['message'=>'This user is not found or seems to be deleted'],400);

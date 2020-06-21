@@ -161,6 +161,7 @@
                     .then(result => {
 
                         if (result.status !=200) {
+                            this.isLoading = false;
                             result.json().then(response => {
                                 let errors= response.errors;
                                 let htmlErrors= "<ul>";
