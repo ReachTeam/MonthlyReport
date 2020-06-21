@@ -48,7 +48,6 @@ class CompanyReport extends Controller
         $file = $request->file('report');
         $name=$file->getClientOriginalName();
         $filePath = 'attachable/' .$user->id.'/'. $user->username.'-'.$request->month.'-'.$request->year??Carbon::now()->year.$file->getClientOriginalExtension();        Storage::disk('s3')->put($filePath, file_get_contents($file), 'public');
-//        $user->addMediaFromRequest('report')->toMediaCollection('monthly_report_attachments','s3-plus');
         return $filePath;
     }
 
