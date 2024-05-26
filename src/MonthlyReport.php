@@ -38,6 +38,6 @@ class MonthlyReport extends Tool
     {
         return MenuSection::make('Monthly Report')
             ->path('/monthly-report')
-            ->icon('server');
+            ->icon('document-report');
     }
 }
