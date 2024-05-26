@@ -56,7 +56,7 @@
                     </div>
                 </div>
 
-                <div class="flex items-center">
+                <div class="flex items-center" style="flex-direction: row-reverse">
                     <button class="btn btn-default btn-primary inline-flex items-center relative"
                             @click="saveInfluencerReport($event)" dusk="create-button" :disabled="disabled">
                         <span class=""> Save Report</span>
@@ -74,12 +74,10 @@
 
 <script>
     import axios from "axios";
-    import Vue from "vue";
-    import VueSweetalert2 from 'vue-sweetalert2';
+    import Swal from 'sweetalert2'
     import Loading from './Loading'
     import 'sweetalert2/dist/sweetalert2.min.css';
 
-    Vue.use(VueSweetalert2);
     export default {
         name: 'Tools',
         components: {
@@ -169,7 +167,7 @@
                                     htmlErrors+= '<li>'+errors[err][0]+'</li>'
                                 }
                                 htmlErrors += "</ul>"
-                                Vue.swal( {
+                                Swal.fire({
                                     icon:'error',
                                     title:response.message,
                                     html: htmlErrors

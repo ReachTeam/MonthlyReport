@@ -27,4 +27,17 @@ class MonthlyReport extends Tool
     {
         return view('monthly-report::navigation');
     }
+
+        /**
+     * Build the menu that renders the navigation links for the tool.
+     *
+     * @param  \Illuminate\Http\Request $request
+     * @return mixed
+     */
+    public function menu(Request $request)
+    {
+        return MenuSection::make('Monthly Report')
+            ->path('/monthly-report')
+            ->icon('server');
+    }
 }
