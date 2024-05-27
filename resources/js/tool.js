@@ -1,9 +1,3 @@
-Nova.booting((Vue, router, store) => {
-    router.addRoutes([
-        {
-            name: 'monthly-report',
-            path: '/monthly-report',
-            component: require('./components/Tool'),
-        },
-    ])
-})
+Nova.booting((Vue) => {
+    Nova.inertia("MonthlyReport", require('./components/Tool.vue').default);
+});

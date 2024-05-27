@@ -4,6 +4,8 @@ namespace Influencer\MonthlyReport;
 
 use Laravel\Nova\Nova;
 use Laravel\Nova\Tool;
+use Illuminate\Http\Request;
+use Laravel\Nova\Menu\MenuSection;
 
 class MonthlyReport extends Tool
 {
@@ -26,5 +28,18 @@ class MonthlyReport extends Tool
     public function renderNavigation()
     {
         return view('monthly-report::navigation');
+    }
+
+        /**
+     * Build the menu that renders the navigation links for the tool.
+     *
+     * @param  \Illuminate\Http\Request $request
+     * @return mixed
+     */
+    public function menu(Request $request)
+    {
+        return MenuSection::make('Monthly Report')
+            ->path('/monthly-report')
+            ->icon('document-report');
     }
 }

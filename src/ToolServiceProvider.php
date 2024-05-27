@@ -6,7 +6,9 @@ use Laravel\Nova\Nova;
 use Laravel\Nova\Events\ServingNova;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
+use Laravel\Nova\Http\Middleware\Authenticate;
 use Influencer\MonthlyReport\Http\Middleware\Authorize;
+
 
 class ToolServiceProvider extends ServiceProvider
 {
@@ -38,6 +40,9 @@ class ToolServiceProvider extends ServiceProvider
         if ($this->app->routesAreCached()) {
             return;
         }
+        
+        Nova::router(['nova', Authenticate::class, Authorize::class], 'monthly-report')
+            ->group(__DIR__.'/../routes/inertia.php');
 
         Route::middleware(['nova', Authorize::class])
                 ->prefix('nova-vendor/monthly-report')
