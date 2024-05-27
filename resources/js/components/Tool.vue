@@ -178,7 +178,7 @@
                         }else{
                             this.isLoading = false;
                             result.json().then(response => {
-                                Vue.swal({
+                                Swal.fire({
                                     title: response.message,
                                     html: '<small>'+response.report+'</small>',
                                     confirmButtonText: 'Ok',
