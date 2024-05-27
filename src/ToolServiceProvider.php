@@ -39,7 +39,7 @@ class ToolServiceProvider extends ServiceProvider
             return;
         }
         
-        Nova::router(['nova', Authenticate::class, Authorize::class], 'campaign-history-report')
+        Nova::router(['nova', Authenticate::class, Authorize::class], 'monthly-report')
             ->group(__DIR__.'/../routes/inertia.php');
 
         Route::middleware(['nova', Authorize::class])
