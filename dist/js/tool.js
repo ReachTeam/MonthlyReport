@@ -171,7 +171,7 @@ function _asyncToGenerator(n) { return function () { var t = this, e = arguments
         } else {
           _this2.isLoading = false;
           result.json().then(function (response) {
-            Vue.swal({
+            sweetalert2__WEBPACK_IMPORTED_MODULE_0___default().fire({
               title: response.message,
               html: '<small>' + response.report + '</small>',
               confirmButtonText: 'Ok',
