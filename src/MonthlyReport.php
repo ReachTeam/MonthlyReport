@@ -4,6 +4,8 @@ namespace Influencer\MonthlyReport;
 
 use Laravel\Nova\Nova;
 use Laravel\Nova\Tool;
+use Illuminate\Http\Request;
+use Laravel\Nova\Menu\MenuSection;
 
 class MonthlyReport extends Tool
 {

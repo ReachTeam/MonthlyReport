@@ -58,6 +58,7 @@
 
                 <div class="flex items-center" style="flex-direction: row-reverse">
                     <button class="btn btn-default btn-primary inline-flex items-center relative"
+                            style="margin: 20px; padding: 10px; color: white; background-color: #38bdf8; border-radius: 4px"
                             @click="saveInfluencerReport($event)" dusk="create-button" :disabled="disabled">
                         <span class=""> Save Report</span>
                     </button>

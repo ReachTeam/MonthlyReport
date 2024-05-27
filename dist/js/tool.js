@@ -410,6 +410,13 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("option", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(y), 1 /* TEXT */);
   }), 256 /* UNKEYED_FRAGMENT */))], 512 /* NEED_PATCH */), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelSelect, $data.year]]), _hoisted_18])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_19, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
     "class": "btn btn-default btn-primary inline-flex items-center relative",
+    style: {
+      "margin": "20px",
+      "padding": "10px",
+      "color": "white",
+      "background-color": "#38bdf8",
+      "border-radius": "4px"
+    },
     onClick: _cache[5] || (_cache[5] = function ($event) {
       return $options.saveInfluencerReport($event);
     }),
